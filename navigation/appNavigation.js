@@ -3,22 +3,23 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import HomeScreen from '../screens/HomeScreen';
+
+// import HomeScreen from '../screens/HomeScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import forgotScreen from '../screens/forgotScreen'
 import SignUpNGOScreen from '../screens/SignUpNGOScreen';
+// import Profile from '../screens/Profile';
+import CurrentLoc from '../components/CurrentLoc';
 import HomeNavigation from './HomeNavigation';
-
-
 const Stack = createNativeStackNavigator();
 
 
 
 export default function AppNavigation() {
 
-  let initalScreen = 'Welcome'
+  let initalScreen = 'Home'
 
   _retrieveData = async () => {
     try {
@@ -46,6 +47,7 @@ export default function AppNavigation() {
         <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
         <Stack.Screen name="SignUpNGO" options={{ headerShown: false }} component={SignUpNGOScreen} />
         <Stack.Screen name="ForgotPass" options={{ headerShown: false }} component={forgotScreen} />
+        {/* <Stack.Screen name="CurrentLoc" options={{ headerShown: false }} component={CurrentLoc} /> */}
       </Stack.Navigator>
 
 

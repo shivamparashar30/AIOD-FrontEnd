@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput, Alert } from 'react-native'
+import { View, Text, StatusBar, TouchableOpacity, Image, TextInput, Alert, StyleSheet, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'
@@ -14,6 +14,9 @@ export default function LoginScreen() {
   const navigation = useNavigation();
   const [getText, setText] = useState("")
   const [getPassText, setPassText] = useState("")
+
+  // for loading 
+  // const [isLoading, setIsLoading] = useState(true)
 
   const login = () => {
     axios({
@@ -33,11 +36,14 @@ export default function LoginScreen() {
           navigation.navigate('HomeScreen')
         }
       }
+
+
       console.log(apiResponse.data.message);
       this.storeData(apiResponse.data)
     }).catch((err) => {
       console.log();
       console.log(err);
+      // setIsLoading(true);
     });
   }
 
@@ -49,7 +55,15 @@ export default function LoginScreen() {
 
     }
   }
-
+  // loading container
+  // if (isLoading) {
+  //   return (
+  //     <SafeAreaView style={styles.loadingContainer}>
+  //       <ActivityIndicator size="large" color="#0000ff" />
+  //       <Text>Loading...</Text>
+  //     </SafeAreaView>
+  //   )
+  // }
 
   return (
     <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
@@ -124,3 +138,12 @@ export default function LoginScreen() {
     </View>
   )
 }
+// const styles = StyleSheet.create({
+//   loadingContainer: {
+//     flex: 1,
+//     backgroundColor: "#f5f5f5",
+//     paddingTop: StatusBar.currentHeight,
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+// })
