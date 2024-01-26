@@ -19,15 +19,15 @@ const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
 
-  let initalScreen = 'Home'
+  let initalScreen = 'HomeScreen'
 
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem('userdata');
       if (value !== null) {
         // We have data!!
-        console.log(value);
-        initalScreen = "HomeScreen"
+        // console.log(value);
+        initalScreen = "Welcome"
       }
     } catch (error) {
       // Error retrieving data

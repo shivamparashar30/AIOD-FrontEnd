@@ -1,13 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, FlatList } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons'
 // import NgoComponent from './homeScreen/NgoComponent';
 import Cards from '../components/cards';
 import { useNavigation } from '@react-navigation/native';
 
+const CardSkeleton = () => {
+  return (
+    <View style={styles.containerSecond}>
+      {/* Placeholder card content */}
+      <View style={styles.placeholder} />
+      <View style={styles.placeholder} />
+      <View style={styles.placeholder} />
+    </View>
+  );
+};
+// const App = () => {
+
+//---------------
 function HomeScreen() {
   const navigation = useNavigation();
 
+  //Ist channge 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+
+    // Simulating an asynchronous data fetch 
+    setTimeout(() => {
+
+      // Set isLoading to false after  
+      // the data is fetched 
+      setIsLoading(false);
+
+      // Adjust the timeout value  
+      // according to your needs 
+    }, 2000);
+  }, []);
 
   return (
     <SafeAreaView>
@@ -33,14 +62,35 @@ function HomeScreen() {
             </View>
           </TouchableOpacity>
         </View>
-        <FlatList
+        {/* //---------------------------- */}
+        <View>
+          {isLoading ? (
+            // Render the skeleton loading effect
+            // while isLoading is true 
+            <CardSkeleton />
+          ) : (
+            // Render the actual card component
+            // once isLoading is false 
+            <FlatList
+              style={styles.flatList}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={data}
+              renderItem={({ item }) => <Cards title={item.title} desc={item.desc} />}
+              keyExtractor={item => item.id}
+            />
+          )}
+        </View>
+
+        {/* <FlatList
           style={styles.flatList}
           horizontal
           showsHorizontalScrollIndicator={false}
           data={data}
           renderItem={({ item }) => <Cards title={item.title} desc={item.desc} />}
           keyExtractor={item => item.id}
-        />
+        /> */}
+
       </View>
 
     </SafeAreaView >
@@ -117,6 +167,20 @@ const styles = StyleSheet.create({
   profileImg: {
     height: 45,
     width: 45,
+  },
+  containerSecond: {
+    backgroundColor: '#F6F6F6',
+    borderRadius: 13,
+    padding: 16,
+    marginBottom: 16,
+    marginTop: 50,
+    height: 100,
+  },
+  placeholder: {
+    backgroundColor: '#ccc',
+    height: 16,
+    borderRadius: 4,
+    marginBottom: 8,
   },
 });
 export default HomeScreen;

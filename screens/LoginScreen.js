@@ -36,24 +36,19 @@ export default function LoginScreen() {
           navigation.navigate('HomeScreen')
         }
       }
-
-
-      console.log(apiResponse.data.message);
-      this.storeData(apiResponse.data)
+      handleAsyncStorage(apiResponse.data.message)
     }).catch((err) => {
-      console.log();
       console.log(err);
       // setIsLoading(true);
     });
   }
 
-  storeData = async (userData) => {
-    try {
-      await AsyncStorage.setItem("userdata", JSON.stringify(userData));
-    } catch (err) {
-      console.log("error while storing data", err);
+  const handleAsyncStorage = (token) => {
+    AsyncStorage.setItem('userdata', `Bearer ${token}`).then(() => {
+      console.log("Token Saved")
+      navigation.navigate('HomeScreen')
 
-    }
+    }).catch(error => console.log("Login: " + error))
   }
   // loading container
   // if (isLoading) {
@@ -89,6 +84,7 @@ export default function LoginScreen() {
           <TextInput
             className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
             placeholder="email"
+            autoCapitalize='none'
             onChangeText={setText}
             value={getText}
           />
