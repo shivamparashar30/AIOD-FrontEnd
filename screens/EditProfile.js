@@ -99,11 +99,12 @@ export default function EditProfile() {
     return (
         <SafeAreaView>
             <View style={{ width: '100%', height: '100%', backgroundColor: 'white' }}>
-                {loading && <ActivityIndicator size="large" color="#0000ff" />}
+                {loading && <ActivityIndicator size="large" color="#2A4D50" />}
                 <View>
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}
-                        className="bg-violet-400 p-2 w-10 rounded-tr-2xl rounded-bl-2xl ml-4"
+                        style={{ color: '#2A4D50' }}
+                        className="p-2 w-10 rounded-tr-2xl rounded-bl-2xl ml-4"
                     >
                         <ArrowLeftIcon size="20" color="black" />
 
@@ -167,9 +168,10 @@ export default function EditProfile() {
                     </View>
 
                 </View>
-                <View className="form space-y-2 mx-16 my-8" style={{ borderRadius: 20 }}>
+                <View className="form space-y-2 mx-16 my-8" style={{ borderRadius: 20, backgroundColor: '#2A4D50' }}>
                     <Button title="Update"
-                        onPress={updateHandler} />
+                        onPress={updateHandler}
+                    />
                 </View>
             </View>
 

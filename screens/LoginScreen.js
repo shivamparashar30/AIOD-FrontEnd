@@ -50,15 +50,6 @@ export default function LoginScreen() {
 
     }).catch(error => console.log("Login: " + error))
   }
-  // loading container
-  // if (isLoading) {
-  //   return (
-  //     <SafeAreaView style={styles.loadingContainer}>
-  //       <ActivityIndicator size="large" color="#0000ff" />
-  //       <Text>Loading...</Text>
-  //     </SafeAreaView>
-  //   )
-  // }
 
   return (
     <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>

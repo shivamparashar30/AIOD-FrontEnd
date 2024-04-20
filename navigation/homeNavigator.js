@@ -7,6 +7,15 @@ import Profile from '../screens/Profile';
 import HomeScreen from '../screens/HomeScreen';
 import CurrentLoc from '../components/CurrentLoc';
 import ProfileNavigator from '../navigation/ProfileNavigator'
+import Books from '../screens/DonationScreen/Books';
+import Money from '../screens/DonationScreen/Money';
+import Food from '../screens/DonationScreen/Food';
+import Clothes from '../screens/DonationScreen/Clothes';
+import GlobalAidNgo from '../screens/Ngos/GlobalAidNgo';
+import CompassionateNgo from '../screens/Ngos/CompassionateNgo';
+import EmpowermentNgo from '../screens/Ngos/EmpowermentNgo';
+import HopeForNgo from '../screens/Ngos/HopeForNgo';
+import HumanityNgo from '../screens/Ngos/HumanityNgo';
 const Stack = createNativeStackNavigator();
 
 
@@ -15,27 +24,21 @@ export default function HomeNavigator() {
 
   let initalScreen = 'HomeScreen'
 
-  _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('userdata');
-      if (value !== null) {
-        // We have data!!
-        // console.log(value);
-        initalScreen = "HomeScreen"
-      }
-    } catch (error) {
-      // Error retrieving data
-      console.log(error);
-    }
-  };
-
-  this._retrieveData()
-
   return (
     <Stack.Navigator initialRouteName={initalScreen} >
       <Stack.Screen name="HomeScreen" options={{ headerShown: false }} component={HomeScreen} />
       <Stack.Screen name="Profile" options={{ headerShown: false }} component={ProfileNavigator} />
       <Stack.Screen name="CurrentLoc" options={{ headerShown: false }} component={CurrentLoc} />
+      <Stack.Screen name="Books" options={{ headerShown: false }} component={Books} />
+      <Stack.Screen name="Clothes" options={{ headerShown: false }} component={Clothes} />
+      <Stack.Screen name="Food" options={{ headerShown: false }} component={Food} />
+      <Stack.Screen name="Money" options={{ headerShown: false }} component={Money} />
+      <Stack.Screen name="GlobalAidNgo" options={{ headerShown: false }} component={GlobalAidNgo} />
+      <Stack.Screen name="CompassionateNgo" options={{ headerShown: false }} component={CompassionateNgo} />
+      <Stack.Screen name="EmpowermentNgo" options={{ headerShown: false }} component={EmpowermentNgo} />
+      <Stack.Screen name="HopeForNgo" options={{ headerShown: false }} component={HopeForNgo} />
+      <Stack.Screen name="HumanityNgo" options={{ headerShown: false }} component={HumanityNgo} />
+
     </Stack.Navigator>
   )
 }

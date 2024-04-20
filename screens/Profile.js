@@ -1,6 +1,6 @@
 
 
-import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator, Alert, FlatList } from 'react-native'
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator, Alert, FlatList, TouchableWithoutFeedback } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Ionicons from '@expo/vector-icons/Ionicons'
@@ -56,6 +56,24 @@ function Profile() {
             setIsLoading(false);
         });
     }
+
+    useEffect(() => {
+        getToken()
+    }, []);
+
+    const logout = (id) => {
+        console.log(id);
+        if (id == 6) {
+            console.log("Logout");
+            AsyncStorage.removeItem('userdata').then(() => {
+                console.log("Token Removed")
+                navigation.navigate('Login')
+
+            }).catch(error => console.log("Profile: " + error))
+
+        }
+    }
+
     const data = [
         { id: '1', title: 'App Update Available', icon: 'phone-portrait-outline' },
         { id: '2', title: 'Your Profile', icon: 'person-outline' },
@@ -66,20 +84,17 @@ function Profile() {
         // Add more items as needed
     ];
 
-    const ListItem = ({ title, icon, fullWidth }) => {
+    const ListItem = ({ id, title, icon, fullWidth }) => {
         return (
-            <TouchableOpacity>
+            <TouchableWithoutFeedback onPress={() => logout(id)}>
                 <View style={[styles.itemCard, fullWidth ? styles.fullWidthCard : null]}>
                     <Ionicons name={icon} size={30} color="black" />
                     <Text style={styles.itemTitle}>{title}</Text>
                 </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
         );
     };
 
-    useEffect(() => {
-        getToken()
-    }, []);
 
 
     return (
@@ -89,7 +104,7 @@ function Profile() {
                     // console.log('You tapped the button!');
                     Alert.alert('Clicked On View Activity')
                 }} > */}
-                {loading && <ActivityIndicator size="large" color="#0000ff" />}
+                {loading && <ActivityIndicator size="large" color="#2A4D50" />}
 
                 <View style={styles.blockContainer} >
 
@@ -129,7 +144,7 @@ function Profile() {
                     data={data}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <ListItem title={item.title} icon={item.icon} fullWidth={item.fullWidth} />
+                        <ListItem id={item.id} title={item.title} icon={item.icon} fullWidth={item.fullWidth} />
                     )}
                 />
             </SafeAreaView>
@@ -179,7 +194,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 10,
         height: 180,
-        backgroundColor: 'indigo',
+        backgroundColor: '#2A4D50',
         borderRadius: 16,
         borderWidth: 1,
         borderColor: 'gray',

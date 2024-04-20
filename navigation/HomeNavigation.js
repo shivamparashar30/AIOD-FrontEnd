@@ -1,18 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import HomeScreen from '../screens/HomeScreen';
-// import Profile from '../screens/Profile';
 import Donate from '../screens/Donate';
 import AboutUs from '../screens/AboutUs';
 import { View, StyleSheet, Image } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons'
-// import Profile from '../screens/Profile';
 import HomeNavigator from './homeNavigator';
-// import HomeScreen from '../screens/HomeScreen';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import DonationNavigation from './DonationNavigation';
+
 const Tab = createBottomTabNavigator();
-// const Stack = createNativeStackNavigator();
 
 
 const screenOptions = {
@@ -38,7 +34,7 @@ export default function HomeNavigation() {
                 // tabBarStyle: [{ backgroundColor: "#111" }], // for bottom tab color grey 
                 tabBarShowLabel: true,
                 headerTintColor: "#0000",
-                tabBarActiveTintColor: "#7970E1",
+                tabBarActiveTintColor: "#2A4D50",
                 tabBarInactiveTintColor: "grey",
                 headerStyle: {
                     backgroundColor: '#7970E1'
@@ -48,7 +44,7 @@ export default function HomeNavigation() {
                 headerTitleStyle: { fontWeight: "bold" },
             }}
         >
-            <Tab.Screen name="Home Screen" component={HomeNavigator}
+            <Tab.Screen name="HomeScreen" component={HomeNavigator}
                 options={{
 
                     tabBarLabel: "Home",
@@ -58,13 +54,16 @@ export default function HomeNavigation() {
                 }} />
 
 
-            <Tab.Screen name="Donate" component={Donate}
+            <Tab.Screen name="Donate" component={DonationNavigation}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <View style={styles.imageContainer}>
-                            <Image style={styles.profileImg} source={require('../assets/images/DonateBtn2.png')} />
+
+                            <MaterialCommunityIcons name='heart' size={80} color='#2A4D50' />
+
                         </View>
                     ),
+
                 }} />
             <Tab.Screen name="AboutUs" component={AboutUs}
                 options={{
@@ -88,10 +87,10 @@ const styles = StyleSheet.create({
         height: 80,
         borderRadius: 150 / 2,
         overflow: "hidden",
-        borderWidth: 1,
-        borderColor: "#877dfa",
+        // borderWidth: 1,
+        // borderColor: "#877dfa",
         marginStart: 5,
-        marginTop: -49,
+        marginTop: -9,
         // borderRadius: 20,
 
     },

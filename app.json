@@ -17,6 +17,13 @@
         {
           "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
         }
+       
+      ],
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "The app accesses your Camera to let you share them "
+        }
       ]
     ],
     "assetBundlePatterns": [
