@@ -1,14 +1,121 @@
 import { Alert, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'
 import { COLORS, SIZES } from '../../constants'
 import { useNavigation } from '@react-navigation/native';
 import RazorpayCheckout from 'react-native-razorpay';
+import SelectNgo from '../../components/maps/SelectNgo';
+import SelectNgoDropdown from '../../components/maps/SelectNgoDropdown';
+import SelectDropdown from 'react-native-select-dropdown'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import constant from '../../constant';
+// import { err } from 'react-native-svg/lib/typescript/xml';
 
 
 const Money = () => {
 
+    // const navigation = useNavigation();
+
     const navigation = useNavigation();
+
+    const [userList, setUserList] = useState([])
+    const [token, setToken] = useState("")
+    const [ngoData, setNgoData] = useState({})
+    const [userData, setUserData] = useState({})
+
+
+    const getToken = async () => {
+        try {
+            const token = await AsyncStorage.getItem("userdata");
+            console.log(token);
+
+            if (token === null) {
+                navigation.navigate('Welcome');
+                return;
+            }
+
+            const response = JSON.parse(token);
+            setToken(response[0]);
+            getData(response[0]);
+            getMeData(response[0]);
+        } catch (error) {
+            console.log("Splash: " + error);
+        }
+    };
+
+    const getData = (token) => {
+        // setIsLoading(true)
+        axios({
+            method: 'get',
+            url: constant.BASE_URL + '/auth/users',
+            headers: { 'Authorization': token }
+        }).then((apiResponse) => {
+            // const { name } = apiResponse.data.data
+            console.log(apiResponse.data.data);
+            setUserList(getNgos(apiResponse.data.data))
+            // setUserList(apiResponse.data.data.filter)
+            // setIsLoading(false)
+        }).catch((err) => {
+            console.log("Profile" + err);
+            // setIsLoading(false);
+        });
+    }
+    const getMeData = (token) => {
+        axios({
+            method: 'get',
+            url: constant.BASE_URL + '/auth/me',
+            headers: { 'Authorization': token }
+        }).then((apiResponse) => {
+            setUserData(apiResponse.data.data)
+        }).catch((err) => {
+            console.log("Profile" + err);
+        });
+    }
+
+    useEffect(() => {
+        getToken()
+    }, []);
+
+
+    const donateMoney = (tid) => {
+        axios({
+            method: 'post',
+            url: constant.BASE_URL + '/money/moneydonate',
+            headers: { 'Content-Type': 'application/json', 'charset': 'utf-8', 'Authorization': token },
+            data: {
+                paymentID: tid,
+                donationAmount: amountInput,
+                ngoId: ngoData._id,
+                userId: userData._id,
+                userName: fullName,
+                userEmail: email,
+                userPhoneno: phone
+
+            },
+        }).then((apiResponse) => {
+            console.log(apiResponse.data.data);
+        }).catch((err) => {
+            console.log(err);
+            // setIsLoading(true);
+        });
+    }
+
+    function getNgos(data) {
+        const filteredUser = data.filter((user) => {
+            return user.role === "ngo";
+        });
+        return filteredUser;
+    }
+
+    function getNgosData(name, userList) {
+        const filteredUser = userList.find((user) => {
+            return user.name === name;
+        });
+        return filteredUser;
+    }
+
 
     const [selectedSource, setSelectedSource] = useState('');
     const [amountInput, setAmountInput] = useState('');
@@ -36,13 +143,14 @@ const Money = () => {
 
     const handleDonate = () => {
         var options = {
+
             description: 'Credits towards Ngos',
             image: 'https://i.imgur.com/3g7nmJC.jpg',
             currency: 'INR',
             key: 'rzp_test_Xx4oAR91hPNqOt',
-            amount: { handleAmountChange },
-            name: { fullName },
-            order_id: 'order_DslnoIgkIDL8Zt',//Replace this with an order_id created using Orders API.
+            amount: amountInput * 100,
+            name: ngoData.name,
+            // order_id: 'order_DslnoIgkIDL8Zt',//Replace this with an order_id created using Orders API.
             prefill: {
                 email: 'user@email.com',
                 contact: '8112270790',
@@ -53,6 +161,7 @@ const Money = () => {
         RazorpayCheckout.open(options).then((data) => {
             // handle success
             alert(`Success: ${data.razorpay_payment_id}`);
+            donateMoney(data.razorpay_payment_id);
         }).catch((error) => {
             // handle failure
             alert(`Error: ${error.code} | ${error.description}`);
@@ -182,6 +291,39 @@ const Money = () => {
                     keyboardType="phone-pad"
                 />
             </View>
+            <View style={{ marginTop: 10, marginHorizontal: 20 }}>
+                {/* <SelectNgoDropdown /> */}
+                <SelectDropdown
+                    data={userList.map(item => item.name)}
+                    onSelect={(selectedItem, index) => {
+                        setNgoData(getNgosData(selectedItem, userList));
+                    }}
+                    renderButton={(selectedItem, isOpened) => {
+                        return (
+                            <View style={styles.dropdownButtonStyle}>
+                                {selectedItem && (
+                                    <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+                                )}
+                                <Text style={styles.dropdownButtonTxtStyle}>
+                                    {selectedItem || 'Select NGO'}
+                                </Text>
+                                <Icon name={isOpened ? 'chevron-up' : 'chevron-down'} style={styles.dropdownButtonArrowStyle} />
+                            </View>
+                        );
+                    }}
+                    renderItem={(item, index, isSelected) => {
+                        return (
+                            <View style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: '#D2D9DF' }) }}>
+                                <Icon name={item.icon} style={styles.dropdownItemIconStyle} />
+                                <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
+                            </View>
+                        );
+                    }}
+                    showsVerticalScrollIndicator={false}
+                    dropdownStyle={styles.dropdownMenuStyle}
+                />
+            </View>
+
             <View style={{ marginHorizontal: 250, marginTop: 20 }}>
                 <TouchableOpacity onPress={handleNextPress}
                     style={{
@@ -295,4 +437,49 @@ const styles = StyleSheet.create({
         color: color,
         marginLeft: -64,
     }),
+    dropdownButtonStyle: {
+        width: 200,
+        height: 50,
+        backgroundColor: '#E9ECEF',
+        borderRadius: 12,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 12,
+    },
+    dropdownButtonTxtStyle: {
+        flex: 1,
+        fontSize: 18,
+        fontWeight: '500',
+        color: '#151E26',
+    },
+    dropdownButtonArrowStyle: {
+        fontSize: 28,
+    },
+    dropdownButtonIconStyle: {
+        fontSize: 28,
+        marginRight: 8,
+    },
+    dropdownMenuStyle: {
+        backgroundColor: '#E9ECEF',
+        borderRadius: 8,
+    },
+    dropdownItemStyle: {
+        width: '100%',
+        flexDirection: 'row',
+        paddingHorizontal: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 8,
+    },
+    dropdownItemTxtStyle: {
+        flex: 1,
+        fontSize: 18,
+        fontWeight: '500',
+        color: '#151E26',
+    },
+    dropdownItemIconStyle: {
+        fontSize: 28,
+        marginRight: 8,
+    },
 })

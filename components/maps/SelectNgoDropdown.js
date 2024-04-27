@@ -150,19 +150,7 @@ const SelectNgoDropdown = () => {
 
     return (
         <SafeAreaView>
-            <View style={styles.container}>
-                {/* Header */}
-                <View style={styles.topContainer}>
-                    <View style={styles.backIcon}>
-                        <TouchableOpacity onPress={() => { navigation.goBack() }}>
-                            <ArrowLeftIcon color={'#2A4D50'} />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.titleTextContainer}>
-                        <Text style={styles.titleText(COLORS.primary, SIZES.xSmall - 5)}>Select NGO</Text>
-                    </View>
-                </View>
-            </View>
+
             {/* <View style={{ marginTop: 70 }}>
                 <Text> Choose NGO according Your location</Text>
             </View> */}

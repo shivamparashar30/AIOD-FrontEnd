@@ -2,6 +2,7 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-na
 import React from 'react'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'
 import { useNavigation } from '@react-navigation/native'
+import { Ionicons } from '@expo/vector-icons';
 // import LottieView from 'lottie-react-native';
 
 const WaitingScreen = () => {
@@ -35,6 +36,7 @@ const WaitingScreen = () => {
                 {/* <LottieView
                     style={{ width: 300, height: 300 }}
                     source={require('../assets/images/waiting.json')} autoPlay loop /> */}
+                {/* <Ionicons name="timer-outline" size={38} color="white" /> */}
             </View>
 
         </SafeAreaView>
