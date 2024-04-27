@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'
 import { COLORS, SIZES } from '../../constants'
@@ -37,6 +37,25 @@ const Food = () => {
     //Types pf vehicle 
     const [selectedIcon, setSelectedIcon] = useState(null);
 
+    // condition for next
+    const handleNextPress = () => {
+        if (!selectedSource || !selectedType || !selectedIcon) {
+            Alert.alert('Incomplete Information', 'Please fill in all required fields.');
+        } else {
+            navigation.navigate('Address', {
+                foodData: {
+                    selectedSource,
+                    selectedType,
+                    selectedIcon,
+                    foodItems,
+                    count,
+                },
+            });
+        }
+    };
+    //text input
+
+    const [foodItems, setFoodItems] = useState("");
 
     return (
         <SafeAreaView>
@@ -117,6 +136,9 @@ const Food = () => {
                     multiline={true}
                     placeholder="1. Chapati - 12 ..."
                     textAlignVertical="top"
+                    value={foodItems}
+                    onChangeText={setFoodItems}
+                    editable={true} // Ensure the TextInput is editable
                 />
             </View>
             <View>
@@ -177,7 +199,7 @@ const Food = () => {
                 <Text style={styles.infoText}>(Select based on qty.)</Text>
             </View>
             <View style={{ marginHorizontal: 270, marginTop: 20 }}>
-                <TouchableOpacity onPress={() => { navigation.navigate("FoodSecond") }}
+                <TouchableOpacity onPress={handleNextPress}
                     style={{
                         backgroundColor: '#2A4D50',
                         paddingVertical: 20,

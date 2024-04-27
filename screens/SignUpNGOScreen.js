@@ -75,6 +75,7 @@ export default function SignUpScreen() {
                         className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
                         onChangeText={setPhone}
                         value={getPhone}
+                        keyboardType={'number-pad'}
                         placeholder='Enter mob no'
                     />
                     <Text className="text-gray-700 ml-4">Email Address</Text>

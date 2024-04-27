@@ -16,6 +16,12 @@ import CompassionateNgo from '../screens/Ngos/CompassionateNgo';
 import EmpowermentNgo from '../screens/Ngos/EmpowermentNgo';
 import HopeForNgo from '../screens/Ngos/HopeForNgo';
 import HumanityNgo from '../screens/Ngos/HumanityNgo';
+import FoodSecond from '../screens/DonationScreen/FoodSecond';
+import SelectAddress from '../screens/SelectAddress';
+import SelectLocMap from '../components/maps/SelectLocMap';
+import AddAddressDetails from '../components/maps/AddAddressDetails';
+import SelectNgo from '../components/maps/SelectNgo';
+import PaymentGateway from '../screens/DonationScreen/PaymentGateway';
 const Stack = createNativeStackNavigator();
 
 
@@ -38,6 +44,13 @@ export default function HomeNavigator() {
       <Stack.Screen name="EmpowermentNgo" options={{ headerShown: false }} component={EmpowermentNgo} />
       <Stack.Screen name="HopeForNgo" options={{ headerShown: false }} component={HopeForNgo} />
       <Stack.Screen name="HumanityNgo" options={{ headerShown: false }} component={HumanityNgo} />
+      <Stack.Screen name="FoodSecond" options={{ headerShown: false }} component={FoodSecond} />
+      <Stack.Screen name="Address" options={{ headerShown: false }} component={SelectAddress} />
+      <Stack.Screen name="Map" options={{ headerShown: false }} component={SelectLocMap} />
+      <Stack.Screen name="AddressDetails" options={{ headerShown: false }} component={AddAddressDetails} />
+      {/* <Stack.Screen name="SelectNgoDropdown" options={{ headerShown: false }} component={SelectNgoDropdown} /> */}
+      <Stack.Screen name="SelectNgo" options={{ headerShown: false }} component={SelectNgo} />
+      <Stack.Screen name="PaymentGateway" options={{ headerShown: false }} component={PaymentGateway} />
 
     </Stack.Navigator>
   )

@@ -1,29 +1,20 @@
-import { Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'
 import { COLORS, SIZES } from '../../constants'
 import { useNavigation } from '@react-navigation/native';
+import RazorpayCheckout from 'react-native-razorpay';
 
 
 const Money = () => {
+
     const navigation = useNavigation();
-
-    // most donation amt
-
-    // const [selectedSource, setSelectedSource] = useState('home');
-    // const [selectedType, setSelectedType] = useState('');
-
-    // const handleSourcePress = (source) => {
-    //     setSelectedSource(source);
-    // };
-
-    // const handleTypePress = (type) => {
-    //     setSelectedType(type);
-    // };
-
 
     const [selectedSource, setSelectedSource] = useState('');
     const [amountInput, setAmountInput] = useState('');
+    const [fullName, setFullName] = useState('shivam');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
 
     const handleSourcePress = (source) => {
         setSelectedSource(source);
@@ -35,11 +26,38 @@ const Money = () => {
         setAmountInput(text);
     };
 
-    const [fullName, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const handleNextPress = () => {
+        if (!amountInput || !fullName || !email || !phone) {
+            Alert.alert('Incomplete Details', 'Please fill in all the required information.');
+        } else {
+            handleDonate();
+        }
+    };
 
-
+    const handleDonate = () => {
+        var options = {
+            description: 'Credits towards Ngos',
+            image: 'https://i.imgur.com/3g7nmJC.jpg',
+            currency: 'INR',
+            key: 'rzp_test_Xx4oAR91hPNqOt',
+            amount: { handleAmountChange },
+            name: { fullName },
+            order_id: 'order_DslnoIgkIDL8Zt',//Replace this with an order_id created using Orders API.
+            prefill: {
+                email: 'user@email.com',
+                contact: '8112270790',
+                name: { setFullName }
+            },
+            theme: { color: '#2A4D50' }
+        }
+        RazorpayCheckout.open(options).then((data) => {
+            // handle success
+            alert(`Success: ${data.razorpay_payment_id}`);
+        }).catch((error) => {
+            // handle failure
+            alert(`Error: ${error.code} | ${error.description}`);
+        });
+    }
 
     return (
         <SafeAreaView>
@@ -164,20 +182,20 @@ const Money = () => {
                     keyboardType="phone-pad"
                 />
             </View>
-            <View style={{ marginHorizontal: 270, marginTop: 20 }}>
-                <TouchableOpacity onPress={() => { navigation.navigate("FoodSecond") }}
+            <View style={{ marginHorizontal: 250, marginTop: 20 }}>
+                <TouchableOpacity onPress={handleNextPress}
                     style={{
                         backgroundColor: '#2A4D50',
                         paddingVertical: 20,
                         paddingHorizontal: 33,
                         borderRadius: 20,
-                        width: 100
+                        width: 120
                     }}>
                     <Text style={{
                         color: 'white',
                         fontWeight: 'bold'
                     }}>
-                        Next
+                        Donate
                     </Text>
                 </TouchableOpacity>
             </View>

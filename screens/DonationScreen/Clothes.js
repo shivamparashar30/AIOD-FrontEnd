@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'
 import { COLORS, SIZES } from '../../constants'
@@ -38,6 +38,15 @@ const Clothes = () => {
 
     //types of vehicle
     const [selectedIcon, setSelectedIcon] = useState(null);
+
+    // condition for next
+    const handleNextPress = () => {
+        if (!selectedSource || !selectedIcon) {
+            Alert.alert('Incomplete Information', 'Please fill in all required fields.');
+        } else {
+            navigation.navigate('Address');
+        }
+    };
 
     return (
         <SafeAreaView>
@@ -166,7 +175,7 @@ const Clothes = () => {
                 <Text style={styles.infoText}>(Select based on qty.)</Text>
             </View>
             <View style={{ marginHorizontal: 270, marginTop: 20 }}>
-                <TouchableOpacity onPress={() => { navigation.navigate("FoodSecond") }}
+                <TouchableOpacity onPress={handleNextPress}
                     style={{
                         backgroundColor: '#2A4D50',
                         paddingVertical: 20,

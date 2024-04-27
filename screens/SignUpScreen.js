@@ -14,7 +14,12 @@ export default function SignUpScreen({ route }) {
     const [getPhone, setPhone] = useState("")
     const [getEmail, setEmail] = useState("")
     const [getPassText, setPassText] = useState("")
-    const { type } = route.params
+    // const { type } = route.params
+
+    let type = ""; // Default value for type if not provided in route.params
+    if (route.params && route.params.type) {
+        type = route.params.type;
+    }
 
     const signUp = () => {
         axios({

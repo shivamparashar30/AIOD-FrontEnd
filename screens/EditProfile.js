@@ -23,17 +23,24 @@ export default function EditProfile() {
     const [token, setToken] = useState("")
 
 
-    const getToken = () => {
-        setIsLoading(true)
-        AsyncStorage.getItem("userdata").then(token => {
-            if (token != null) {
-                console.log("Something" + token)
-                setToken(token)
-                getData(token)
-                // setIsLoading(false);
+    const getToken = async () => {
+        try {
+            const token = await AsyncStorage.getItem("userdata");
+            console.log(token);
+
+            if (token === null) {
+                navigation.navigate('Welcome');
+                return;
             }
-        }).catch((err) => console.log("Profle" + err));
-    }
+
+            const response = JSON.parse(token);
+            setToken(response[0]);
+            getData(response[0]);
+        } catch (error) {
+            console.log("Splash: " + error);
+        }
+    };
+
 
     const getData = (token) => {
         setIsLoading(true)

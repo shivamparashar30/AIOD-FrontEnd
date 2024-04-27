@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ArrowLeftIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
@@ -7,9 +7,58 @@ import { Image } from 'react-native';
 import { COLORS, SIZES } from '../constants/index';
 import { Button } from 'react-native';
 import Category from '../components/Category';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import constant from '../constant';
 
 export default function Donate() {
     const navigation = useNavigation();
+    const [donationCount, setDonationCount] = useState([]);
+    const [token, setToken] = useState("")
+
+    const getToken = async () => {
+        try {
+            const token = await AsyncStorage.getItem("userdata")
+            console.log(token);
+
+            if (token === null) {
+                navigation.navigate('Welcome');
+                return;
+            }
+            const response = JSON.parse(token);
+            setToken(response[0]);
+            getData(response[0]);
+        } catch (error) {
+            console.log("Donations: " + error);
+        }
+    };
+
+    const getData = (token) => {
+        axios({
+            method: 'get',
+            url: constant.BASE_URL + '/auth/me',
+            headers: { 'Authorization': token }
+        }).then((apiResponse) => {
+            console.log(apiResponse.data.data);
+            setDonationCount(apiResponse.data.data.donationCount)
+
+        }).catch((err) => {
+            console.log("Donation" + err);
+        })
+
+    }
+    useEffect(() => {
+        getToken()
+    }, []);
+
+    function getNgos(data) {
+        const filteredUser = data.filter((user) => {
+            return user.role === "ngo";
+        });
+        return filteredUser;
+    }
+
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -43,7 +92,7 @@ export default function Donate() {
                     <Image style={styles.logoImg} source={require('../assets/images/donationBoxLogo.png')} />
                 </View>
                 <View>
-                    <Text style={{ color: "white", fontSize: 18, marginLeft: 108, marginTop: 15, fontWeight: 'bold' }}>Total Donation - 5</Text>
+                    <Text style={{ color: "white", fontSize: 18, marginLeft: 108, marginTop: 15, fontWeight: 'bold' }}>Total Donation - {donationCount}</Text>
                 </View>
             </View>
             <View>
@@ -110,15 +159,18 @@ export default function Donate() {
                         Urgent Needs
                     </Text>
                 </View>
-                <View style={{ height: 140, marginTop: 20 }}>
-                    <ScrollView horizontal={true}
-                        showsHorizontalScrollIndicator={false} >
-                        <TouchableOpacity onPress={() => { navigation.navigate("GlobalAidNgo") }}>
-                            <Category imgUri={require('../assets/images/ngo1.jpeg')}
-                                name="Global Aid Network" />
-                        </TouchableOpacity>
+                <View style={{ height: 140, marginTop: 20, right: 10 }}>
+                    {/* <ScrollView horizontal={true}
+                        showsHorizontalScrollIndicator={false} > */}
+                    {/* <TouchableOpacity onPress={() => { navigation.navigate("GlobalAidNgo") }}>
+                        <Category imgUri={require('../assets/images/ngo1.jpeg')}
+                            name="Global Aid Network" />
+                    </TouchableOpacity> */}
+                    <TouchableOpacity onPress={() => { navigation.navigate("GlobalAidNgo") }}>
+                        <Category />
+                    </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => { navigation.navigate("HopeForNgo") }}>
+                    {/* <TouchableOpacity onPress={() => { navigation.navigate("HopeForNgo") }}>
                             <Category imgUri={require('../assets/images/ngo2.jpg')}
                                 name="Hope for Tomorrow Foundation" />
                         </TouchableOpacity>
@@ -138,10 +190,10 @@ export default function Donate() {
                         <TouchableOpacity onPress={() => { navigation.navigate("HumanityNgo") }}>
                             <Category imgUri={require('../assets/images/ngo5.jpeg')}
                                 name="Humanity United Organization" />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
 
-                    </ScrollView>
+                    {/* </ScrollView> */}
                 </View>
 
 

@@ -9,6 +9,8 @@ import forgotScreen from '../screens/forgotScreen'
 import SignUpNGOScreen from '../screens/SignUpNGOScreen';
 import SplashScreen from '../screens/SplashScreen';
 import HomeNavigation from './HomeNavigation';
+// import NgoHomeScreen from '../screens/Ngos/NgoDashboard/NgoHomeScreen';
+import NgoHomeNavigation from '../screens/Ngos/NgoNavigation/NgoHomeNavigation';
 
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +31,8 @@ export default function AppNavigation() {
         <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
         <Stack.Screen name="SignUpNGO" options={{ headerShown: false }} component={SignUpNGOScreen} />
         <Stack.Screen name="ForgotPass" options={{ headerShown: false }} component={forgotScreen} />
+        {/* <Stack.Screen name="NgoHomeScreen" options={{ headerShown: false }} component={NgoHomeScreen} /> */}
+        <Stack.Screen name="NgoHomeScreen" options={{ headerShown: false }} component={NgoHomeNavigation} />
       </Stack.Navigator>
 
 

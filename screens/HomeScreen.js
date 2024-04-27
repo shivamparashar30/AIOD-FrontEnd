@@ -190,11 +190,11 @@ function HomeScreen() {
               </Text>
             </View>
             <View style={{ height: 140, marginTop: 20 }}>
-              <ScrollView horizontal={true}
+              {/* <ScrollView horizontal={true}
                 showsHorizontalScrollIndicator={false}
-                showsVerticalScrollIndicator={false}>
+                showsVerticalScrollIndicator={false}> */}
 
-                <TouchableOpacity onPress={() => { navigation.navigate("GlobalAidNgo") }}>
+              {/* <TouchableOpacity onPress={() => { navigation.navigate("GlobalAidNgo") }}>
                   <Category imgUri={require('../assets/images/ngo1.jpeg')}
                     name="Global Aid Network" />
                 </TouchableOpacity>
@@ -220,10 +220,11 @@ function HomeScreen() {
                 <TouchableOpacity onPress={() => { navigation.navigate("HumanityNgo") }}>
                   <Category imgUri={require('../assets/images/ngo5.jpeg')}
                     name="Humanity United Organization" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+              <Category />
 
 
-              </ScrollView>
+              {/* </ScrollView> */}
             </View>
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
               <View style={{ flex: 1, height: 3, backgroundColor: '#B4B4B8', width: '100%' }} />

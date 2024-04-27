@@ -30,23 +30,27 @@ export default function LoginScreen() {
       },
     }).then((apiResponse) => {
       if (apiResponse.data.role === "ngo") {
-        if (apiResponse.data.message === constant.NOT_VERIFIED_MSG) {
-          Alert.alert(constant.NOT_VERIFIED_MSG)
-        } else {
-          navigation.navigate('HomeScreen')
-        }
+        navigation.navigate('NgoHomeScreen')
+      } else {
+        navigation.navigate('HomeScreen')
       }
-      handleAsyncStorage(apiResponse.data.message)
+      handleAsyncStorage(apiResponse.data.message, apiResponse.data.role)
     }).catch((err) => {
       console.log(err);
       // setIsLoading(true);
     });
   }
 
-  const handleAsyncStorage = (token) => {
-    AsyncStorage.setItem('userdata', `Bearer ${token}`).then(() => {
+  const handleAsyncStorage = (token, role) => {
+    const items = [`Bearer ${token}`, `${role}`]
+    AsyncStorage.setItem('userdata', JSON.stringify(items)).then(() => {
       console.log("Token Saved")
-      navigation.navigate('HomeScreen')
+      if (role === "ngo") {
+        navigation.navigate('NgoHomeScreen')
+      } else {
+        navigation.navigate('HomeScreen')
+      }
+
 
     }).catch(error => console.log("Login: " + error))
   }
