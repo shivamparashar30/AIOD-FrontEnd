@@ -14,7 +14,7 @@ const AddAddressDetails = () => {
     if (route.params && route.params.type) {
         type = route.params.type;
         console.log('====================================');
-        console.log('Address', type);
+        console.log('SelectAddressClothes', type);
         console.log('====================================');
     }
 
@@ -164,15 +164,14 @@ const AddAddressDetails = () => {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity onPress={() => {
-                navigation.navigate("SelectNgo", {
-                    foodData: {
+                navigation.navigate("SelectNgoClothes", {
+                    clothesData: {
                         type,
                         address1,
                         address2,
                         address3,
                         pincode,
-                        phoneno,
-                        selectedSource
+                        phoneno
                     }
                 })
             }}>

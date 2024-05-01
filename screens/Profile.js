@@ -76,6 +76,21 @@ function Profile() {
 
         }
     }
+    const YourProfile = (id) => {
+        if (id == 2) {
+            navigation.navigate('EditProfile')
+        }
+    }
+    const About = (id) => {
+        if (id == 5) {
+            navigation.navigate('AboutUs')
+        }
+    }
+    const Update = (id) => {
+        if (id == 1) {
+            Alert.alert('Update will come shortly')
+        }
+    }
 
     const data = [
         { id: '1', title: 'App Update Available', icon: 'phone-portrait-outline' },
@@ -89,7 +104,7 @@ function Profile() {
 
     const ListItem = ({ id, title, icon, fullWidth }) => {
         return (
-            <TouchableWithoutFeedback onPress={() => logout(id)}>
+            <TouchableWithoutFeedback onPress={() => { logout(id), YourProfile(id), About(id), Update(id) }}>
                 <View style={[styles.itemCard, fullWidth ? styles.fullWidthCard : null]}>
                     <Ionicons name={icon} size={30} color="black" />
                     <Text style={styles.itemTitle}>{title}</Text>
@@ -196,7 +211,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
-        height: 180,
+        height: 130,
         backgroundColor: '#2A4D50',
         borderRadius: 16,
         borderWidth: 1,
@@ -264,7 +279,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         width: 50, // adjust width as needed
-        height: 50, // adjust height as needed
+        height: 45, // adjust height as needed
         marginBottom: 10,
         alignSelf: 'center'
     },

@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Icon } from 'react-native-elements';
 import constant from '../../constant';
+import { AntDesign } from '@expo/vector-icons';
 
 
 const SelectNgo = () => {
@@ -20,8 +21,8 @@ const SelectNgo = () => {
     const navigation = useNavigation()
     const route = useRoute();
     let type = {}; // Default value for type if not provided in route.params
-    if (route.params && route.params.foodData) {
-        type = route.params.foodData;
+    if (route.params && route.params.clothesData) {
+        type = route.params.clothesData;
         console.log('====================================');
         console.log(type);
         console.log('====================================');
@@ -41,7 +42,7 @@ const SelectNgo = () => {
             getData(response[0]);
             getMeData(response[0])
         } catch (error) {
-            console.log("Select Ngo: " + error);
+            console.log("Select Ngo for Clothes: " + error);
         }
     }
 
@@ -79,10 +80,10 @@ const SelectNgo = () => {
         getToken()
     }, []);
 
-    const donateFood = () => {
+    const donateClothes = () => {
         axios({
             method: 'post',
-            url: constant.BASE_URL + '/food/immidiatepickup',
+            url: constant.BASE_URL + '/clothes/clothesdropoff',
             headers: { 'Content-Type': 'application/json', 'charset': 'utf-8', 'Authorization': token },
             data: {
                 ngo: ngoData._id,
@@ -93,17 +94,17 @@ const SelectNgo = () => {
                 phoneno: type.phoneno,
                 pincode: type.pincode,
                 estimateCount: type.type.count,
-                typeOfFood: type.type.selectedType,
-                Vehicle: type.type.selectedIcon,
-                source: type.type.selectedSource,
-                foodItem: type.type.foodItems
+                dressFor: type.type.selectedSource,
+                vehicle: type.type.selectedIcon,
+                // source: type.type.selectedSource,
+                // item: type.type.item
 
 
 
             },
         }).then((apiResponse) => {
             console.log(apiResponse.data.data);
-            Alert.alert("sucess")
+            Alert.alert("success")
             sendRequest(apiResponse.data.data._id)
         }).catch((err) => {
             console.log(err);
@@ -120,15 +121,16 @@ const SelectNgo = () => {
             data: {
                 recipient: ngoData._id,
                 donationid: donationId,
-                donationType: "Food",
+                donationType: "Clothes",
                 userName: userData.name,
                 address2: type.address2,
                 phoneno: type.phoneno,
                 count: type.type.count,
-                source: type.type.selectedType,
+                // source: type.type.selectedType,
+                dressFor: type.type.selectedSource,
                 vehicle: type.type.selectedIcon,
-                Item: type.type.foodItems,
                 status: 1
+                // Item: type.type.foodItems
             },
         }).then((apiResponse) => {
             console.log(apiResponse.data.data);
@@ -181,12 +183,13 @@ const SelectNgo = () => {
                     return (
                         <View style={styles.dropdownButtonStyle}>
                             {selectedItem && (
-                                <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+                                // <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+                                <AntDesign name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
                             )}
                             <Text style={styles.dropdownButtonTxtStyle}>
                                 {selectedItem || 'Select NGO'}
                             </Text>
-                            <Icon name={isOpened ? 'chevron-up' : 'chevron-down'} style={styles.dropdownButtonArrowStyle} />
+                            <AntDesign name={isOpened ? 'up' : 'down'} style={styles.dropdownButtonArrowStyle} />
                         </View>
                     );
                 }}
@@ -202,7 +205,7 @@ const SelectNgo = () => {
                 dropdownStyle={styles.dropdownMenuStyle}
             />
             <View style={{ marginHorizontal: 250, marginTop: 20 }}>
-                <TouchableOpacity onPress={() => { donateFood() }}
+                <TouchableOpacity onPress={() => { donateClothes() }}
                     style={{
                         backgroundColor: '#2A4D50',
                         paddingVertical: 20,
@@ -214,7 +217,7 @@ const SelectNgo = () => {
                         color: 'white',
                         fontWeight: 'bold'
                     }}>
-                        Donate
+                        Donate clothes
                     </Text>
                 </TouchableOpacity>
             </View>

@@ -73,6 +73,7 @@ const EmpowermentNgo = () => {
                         textAlign: 'justify'
                         // letterSpacing: 0.6
                     }}>
+
                         Empowerment Alliance Charity is a non-profit orphanage home that has been providing care for orphaned and vulnerable children since 1998. Our organization was founded with the belief that every child deserves a safe and loving home, and we have been committed to this mission for over two decades.
                     </Text>
                     <Text style={{

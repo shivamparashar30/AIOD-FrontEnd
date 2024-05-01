@@ -2,7 +2,7 @@ import { Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, Vie
 import React, { useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid';
-import { COLORS, SIZES } from '../constants';
+import { COLORS, SIZES } from '../../constants/index';
 import { Ionicons, Entypo } from '@expo/vector-icons';
 
 const SelectAddress = () => {
@@ -14,8 +14,8 @@ const SelectAddress = () => {
     };
     const route = useRoute();
     let type = {}; // Default value for type if not provided in route.params
-    if (route.params && route.params.foodData) {
-        type = route.params.foodData;
+    if (route.params && route.params.clothesData) {
+        type = route.params.clothesData;
         console.log('====================================');
         console.log(type);
         console.log('====================================');
@@ -87,7 +87,7 @@ const SelectAddress = () => {
                         style={{ marginHorizontal: 30 }}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => { navigation.navigate("AddressDetails", { type }) }}>
+                <TouchableOpacity onPress={() => { navigation.navigate("AddAddressDetailsClothes", { type }) }}>
                     <Text style={{
                         fontSize: 16,
                         fontWeight: 'bold',
@@ -159,7 +159,7 @@ const SelectAddress = () => {
                                 height: 73,
                                 width: 130,
                             }}
-                            source={require('../assets/images/donation-box.png')} />
+                            source={require('../../assets/images/donation-box.png')} />
                     </View>
                 </View>
 

@@ -38,13 +38,22 @@ const Clothes = () => {
 
     //types of vehicle
     const [selectedIcon, setSelectedIcon] = useState(null);
+    const [item, setItem] = useState("")
 
     // condition for next
     const handleNextPress = () => {
         if (!selectedSource || !selectedIcon) {
             Alert.alert('Incomplete Information', 'Please fill in all required fields.');
         } else {
-            navigation.navigate('Address');
+            navigation.navigate('SelectAddressClothes', {
+                clothesData: {
+                    selectedSource,
+                    selectedIcon,
+                    item,
+                    count,
+
+                }
+            });
         }
     };
 
@@ -74,24 +83,24 @@ const Clothes = () => {
 
             <View style={styles.containerTwo}>
                 <TouchableOpacity
-                    style={[styles.tab, selectedSource === 'Men' ? styles.selectedTab : null]}
-                    onPress={() => handleSourcePress('Men')}>
-                    <Text style={[styles.tabText, selectedSource === 'Men' ? styles.selectedTabText : null]}>Men</Text>
+                    style={[styles.tab, selectedSource === 'men' ? styles.selectedTab : null]}
+                    onPress={() => handleSourcePress('men')}>
+                    <Text style={[styles.tabText, selectedSource === 'men' ? styles.selectedTabText : null]}>Men</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.tab, selectedSource === 'Women' ? styles.selectedTab : null]}
-                    onPress={() => handleSourcePress('Women')}>
-                    <Text style={[styles.tabText, selectedSource === 'Women' ? styles.selectedTabText : null]}>Women</Text>
+                    style={[styles.tab, selectedSource === 'women' ? styles.selectedTab : null]}
+                    onPress={() => handleSourcePress('women')}>
+                    <Text style={[styles.tabText, selectedSource === 'women' ? styles.selectedTabText : null]}>Women</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.tab, selectedSource === 'Children' ? styles.selectedTab : null]}
-                    onPress={() => handleSourcePress('Children')}>
-                    <Text style={[styles.tabText, selectedSource === 'Children' ? styles.selectedTabText : null]}>Childrens</Text>
+                    style={[styles.tab, selectedSource === 'children' ? styles.selectedTab : null]}
+                    onPress={() => handleSourcePress('children')}>
+                    <Text style={[styles.tabText, selectedSource === 'children' ? styles.selectedTabText : null]}>Childrens</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.tab, selectedSource === 'All' ? styles.selectedTab : null]}
-                    onPress={() => handleSourcePress('All')}>
-                    <Text style={[styles.tabText, selectedSource === 'All' ? styles.selectedTabText : null]}>All</Text>
+                    style={[styles.tab, selectedSource === 'all' ? styles.selectedTab : null]}
+                    onPress={() => handleSourcePress('all')}>
+                    <Text style={[styles.tabText, selectedSource === 'all' ? styles.selectedTabText : null]}>All</Text>
                 </TouchableOpacity>
             </View>
             <View>
@@ -125,6 +134,8 @@ const Clothes = () => {
                     multiline={true}
                     placeholder=" 4 - Tshirts (Size-XL) ..."
                     textAlignVertical="top"
+                    value={item}
+                    onChangeText={setItem}
                 />
             </View>
             <View>

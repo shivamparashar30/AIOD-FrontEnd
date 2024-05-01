@@ -96,7 +96,13 @@ const NgoNotification = () => {
                 contentContainerStyle={styles.flatListContainer}
                 data={paymentData}
                 keyExtractor={(item) => item.id}
-                renderItem={({ item }) => <Text>{item.userName} Donated {item.donationAmount}</Text>}
+                renderItem={({ item }) =>
+                    <View style={{ height: 50, margin: 5, marginTop: 10, backgroundColor: COLORS.gray2, borderRadius: 10 }}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 20, textAlign: 'center' }} >{item.userName} Donated {item.donationAmount}</Text>
+                        {/* <View style={{ height: 1, borderWidth: 1 }}></View> */}
+                    </View>
+                }
+
             />
         </SafeAreaView>
 

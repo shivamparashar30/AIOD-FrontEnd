@@ -18,6 +18,7 @@ export default function HomeNavigator() {
             <Stack.Screen name="Profile" options={{ headerShown: false }} component={Profile} />
             <Stack.Screen name="EditProfile" options={{ headerShown: false }} component={EditProfile} />
 
+
         </Stack.Navigator>
     )
 }

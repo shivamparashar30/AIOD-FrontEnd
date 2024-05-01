@@ -24,6 +24,9 @@ const Books = () => {
     //types of vehicle
     const [selectedIcon, setSelectedIcon] = useState(null);
 
+    //text Input
+    const [bookDetail, setBookDetail] = useState('')
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -52,9 +55,10 @@ const Books = () => {
                 <TextInput
                     style={styles.textInput}
                     multiline={true}
-                    placeholder=" More Puzzle by Shakuntala Devi ......
-                                 Hindi Grammer Class-8th .."
+                    placeholder="More Puzzle by Shakuntala Devi ...... Hindi Grammer Class-8th .."
                     textAlignVertical="top"
+                    value={bookDetail} // Ensure `bookDetail` is properly initialized and updated
+                    onChangeText={setBookDetail} // Use a function to update `bookDetail`
                 />
             </View>
             <View>
@@ -127,7 +131,15 @@ const Books = () => {
                 <Text style={styles.infoText}>(Select based on qty.)</Text>
             </View>
             <View style={{ marginHorizontal: 270, marginTop: 20 }}>
-                <TouchableOpacity onPress={() => { navigation.navigate("FoodSecond") }}
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate("SelectAddressBooks", {
+                        booksData: {
+                            selectedIcon,
+                            bookDetail,
+                            count,
+                        },
+                    })
+                }}
                     style={{
                         backgroundColor: '#2A4D50',
                         paddingVertical: 20,

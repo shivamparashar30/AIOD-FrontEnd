@@ -114,14 +114,14 @@ const Food = () => {
                         <Text style={[styles.tabText, selectedType === 'veg' ? styles.selectedTabText : null]}>Veg</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={[styles.tab, selectedType === 'nonveg' ? styles.selectedTab : null]}
-                        onPress={() => handleTypePress('nonveg')}>
-                        <Text style={[styles.tabText, selectedType === 'nonveg' ? styles.selectedTabText : null]}>Non-Veg</Text>
+                        style={[styles.tab, selectedType === 'non-veg' ? styles.selectedTab : null]}
+                        onPress={() => handleTypePress('non-veg')}>
+                        <Text style={[styles.tabText, selectedType === 'non-veg' ? styles.selectedTabText : null]}>Non-Veg</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={[styles.tab, selectedType === 'veg&nonveg' ? styles.selectedTab : null]}
-                        onPress={() => handleTypePress('veg&nonveg')}>
-                        <Text style={[styles.tabText, selectedType === 'veg&nonveg' ? styles.selectedTabText : null]}>Veg & Non-Veg</Text>
+                        style={[styles.tab, selectedType === 'both' ? styles.selectedTab : null]}
+                        onPress={() => handleTypePress('both')}>
+                        <Text style={[styles.tabText, selectedType === 'both' ? styles.selectedTabText : null]}>Veg & Non-Veg</Text>
                     </TouchableOpacity>
                 </View>
             </View>

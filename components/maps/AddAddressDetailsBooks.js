@@ -8,13 +8,13 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
 
 
-const AddAddressDetails = () => {
+const AddAddressDetailsBooks = () => {
     const route = useRoute();
     let type = {}; // Default value for type if not provided in route.params
     if (route.params && route.params.type) {
         type = route.params.type;
         console.log('====================================');
-        console.log('Address', type);
+        console.log('Books Address ', type);
         console.log('====================================');
     }
 
@@ -164,8 +164,8 @@ const AddAddressDetails = () => {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity onPress={() => {
-                navigation.navigate("SelectNgo", {
-                    foodData: {
+                navigation.navigate("SelectNgoBooks", {
+                    booksData: {
                         type,
                         address1,
                         address2,
@@ -204,7 +204,7 @@ const AddAddressDetails = () => {
     );
 };
 
-export default AddAddressDetails;
+export default AddAddressDetailsBooks;
 
 const styles = StyleSheet.create({
     containerTwo: {

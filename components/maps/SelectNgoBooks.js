@@ -9,9 +9,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Icon } from 'react-native-elements';
 import constant from '../../constant';
+import { AntDesign } from '@expo/vector-icons';
 
 
-const SelectNgo = () => {
+const SelectNgoBooks = () => {
     const [token, setToken] = useState("")
     const [userList, setUserList] = useState([])
     const [ngoData, setNgoData] = useState({})
@@ -20,8 +21,8 @@ const SelectNgo = () => {
     const navigation = useNavigation()
     const route = useRoute();
     let type = {}; // Default value for type if not provided in route.params
-    if (route.params && route.params.foodData) {
-        type = route.params.foodData;
+    if (route.params && route.params.booksData) {
+        type = route.params.booksData;
         console.log('====================================');
         console.log(type);
         console.log('====================================');
@@ -79,10 +80,10 @@ const SelectNgo = () => {
         getToken()
     }, []);
 
-    const donateFood = () => {
+    const donateBooks = () => {
         axios({
             method: 'post',
-            url: constant.BASE_URL + '/food/immidiatepickup',
+            url: constant.BASE_URL + '/Books/donatebooks/dropoff',
             headers: { 'Content-Type': 'application/json', 'charset': 'utf-8', 'Authorization': token },
             data: {
                 ngo: ngoData._id,
@@ -93,11 +94,8 @@ const SelectNgo = () => {
                 phoneno: type.phoneno,
                 pincode: type.pincode,
                 estimateCount: type.type.count,
-                typeOfFood: type.type.selectedType,
                 Vehicle: type.type.selectedIcon,
-                source: type.type.selectedSource,
-                foodItem: type.type.foodItems
-
+                bookDetails: type.type.bookDetail
 
 
             },
@@ -120,14 +118,13 @@ const SelectNgo = () => {
             data: {
                 recipient: ngoData._id,
                 donationid: donationId,
-                donationType: "Food",
+                donationType: "Books",
                 userName: userData.name,
                 address2: type.address2,
                 phoneno: type.phoneno,
                 count: type.type.count,
-                source: type.type.selectedType,
-                vehicle: type.type.selectedIcon,
-                Item: type.type.foodItems,
+                Vehicle: type.type.selectedIcon,
+                bookDetails: type.type.bookDetail,
                 status: 1
             },
         }).then((apiResponse) => {
@@ -181,12 +178,13 @@ const SelectNgo = () => {
                     return (
                         <View style={styles.dropdownButtonStyle}>
                             {selectedItem && (
-                                <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+                                // <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+                                <AntDesign name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
                             )}
                             <Text style={styles.dropdownButtonTxtStyle}>
                                 {selectedItem || 'Select NGO'}
                             </Text>
-                            <Icon name={isOpened ? 'chevron-up' : 'chevron-down'} style={styles.dropdownButtonArrowStyle} />
+                            <AntDesign name={isOpened ? 'up' : 'down'} style={styles.dropdownButtonArrowStyle} />
                         </View>
                     );
                 }}
@@ -202,7 +200,7 @@ const SelectNgo = () => {
                 dropdownStyle={styles.dropdownMenuStyle}
             />
             <View style={{ marginHorizontal: 250, marginTop: 20 }}>
-                <TouchableOpacity onPress={() => { donateFood() }}
+                <TouchableOpacity onPress={() => { donateBooks() }}
                     style={{
                         backgroundColor: '#2A4D50',
                         paddingVertical: 20,
@@ -226,7 +224,7 @@ const SelectNgo = () => {
     )
 }
 
-export default SelectNgo
+export default SelectNgoBooks
 
 const styles = StyleSheet.create({
     container: {

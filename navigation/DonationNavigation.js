@@ -15,6 +15,12 @@ import SelectNgoDropdown from '../components/maps/SelectNgoDropdown';
 import SelectNgo from '../components/maps/SelectNgo';
 import PaymentGateway from '../screens/DonationScreen/PaymentGateway';
 import WaitingScreen from '../components/WaitingScreen';
+import SelectAddressClothes from '../components/maps/SelectAddressClothes'
+import SelectAddressBooks from '../components/maps/SelectAddressBooks'
+import AddAddressDetailsClothes from '../components/maps/AddAddressDetailsClothes'
+import AddAddressDetailsBooks from '../components/maps/AddAddressDetailsBooks'
+import SelectNgoClothes from '../components/maps/SelectNgoClothes'
+import SelectNgoBooks from '../components/maps/SelectNgoBooks'
 const Stack = createNativeStackNavigator();
 
 
@@ -32,10 +38,16 @@ export default function DonationNavigation() {
             <Stack.Screen name="Money" options={{ headerShown: false }} component={Money} />
             <Stack.Screen name="FoodSecond" options={{ headerShown: false }} component={FoodSecond} />
             <Stack.Screen name="Address" options={{ headerShown: false }} component={SelectAddress} />
+            <Stack.Screen name="SelectAddressClothes" options={{ headerShown: false }} component={SelectAddressClothes} />
+            <Stack.Screen name="SelectAddressBooks" options={{ headerShown: false }} component={SelectAddressBooks} />
             <Stack.Screen name="Map" options={{ headerShown: false }} component={SelectLocMap} />
             <Stack.Screen name="AddressDetails" options={{ headerShown: false }} component={AddAddressDetails} />
+            <Stack.Screen name="AddAddressDetailsClothes" options={{ headerShown: false }} component={AddAddressDetailsClothes} />
+            <Stack.Screen name="AddAddressDetailsBooks" options={{ headerShown: false }} component={AddAddressDetailsBooks} />
             {/* <Stack.Screen name="SelectNgoDropdown" options={{ headerShown: false }} component={SelectNgoDropdown} /> */}
             <Stack.Screen name="SelectNgo" options={{ headerShown: false }} component={SelectNgo} />
+            <Stack.Screen name="SelectNgoClothes" options={{ headerShown: false }} component={SelectNgoClothes} />
+            <Stack.Screen name="SelectNgoBooks" options={{ headerShown: false }} component={SelectNgoBooks} />
             <Stack.Screen name="PaymentGateway" options={{ headerShown: false }} component={PaymentGateway} />
             <Stack.Screen name="WaitingScreen" options={{ headerShown: false }} component={WaitingScreen} />
 
