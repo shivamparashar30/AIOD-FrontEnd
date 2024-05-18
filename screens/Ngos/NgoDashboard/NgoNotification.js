@@ -19,10 +19,10 @@ const NgoNotification = () => {
             const token = await AsyncStorage.getItem("userdata");
             console.log(token);
 
-            if (token === null) {
-                navigation.navigate('Welcome');
-                return;
-            }
+            // if (token === null) {
+            //     navigation.navigate('Welcome');
+            //     return;
+            // }
 
             const response = JSON.parse(token);
             setToken(response[0]);

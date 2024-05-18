@@ -63,11 +63,14 @@ function HomeScreen() {
               <View>
                 <View style={styles.viewDrop}>
                   <Text style={styles.text}>Pes University</Text>
-                  <Ionicons name="chevron-down-outline" size={20} color={"black"} style={styles.icons} />
+                  <Ionicons name="chevron-down-outline" size={20} color={"#2A4D50"} style={styles.icons} />
                 </View>
-                <Text style={styles.innerText}>Dwaraka Nagar Banashankari 3rd sta...</Text>
+                <Text style={styles.innerText}>Dwaraka Nagar Banashankari..</Text>
               </View>
             </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Notification")} style={{ marginHorizontal: 25, marginTop: 4 }}>
+            <Ionicons name="notifications" size={32} color="#2A4D50" />
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => {
@@ -180,21 +183,21 @@ function HomeScreen() {
                 </View>
               </TouchableOpacity>
             </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
+            {/* <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
               <View style={{ flex: 1, height: 3, backgroundColor: '#B4B4B8', width: '100%' }} />
-            </View>
+            </View> */}
 
-            <View style={{ flex: 1, paddingTop: 10, paddingHorizontal: 5, marginTop: -10 }}>
+            {/* <View style={{ flex: 1, paddingTop: 10, paddingHorizontal: 5, marginTop: -10 }}>
               <Text style={styles.chooseDonation}>
                 Urgent Needs
               </Text>
-            </View>
-            <View style={{ height: 140, marginTop: 20 }}>
-              {/* <ScrollView horizontal={true}
+            </View> */}
+            {/* <View style={{ height: 140, marginTop: 20 }}> */}
+            {/* <ScrollView horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}> */}
 
-              {/* <TouchableOpacity onPress={() => { navigation.navigate("GlobalAidNgo") }}>
+            {/* <TouchableOpacity onPress={() => { navigation.navigate("GlobalAidNgo") }}>
                   <Category imgUri={require('../assets/images/ngo1.jpeg')}
                     name="Global Aid Network" />
                 </TouchableOpacity>
@@ -221,11 +224,11 @@ function HomeScreen() {
                   <Category imgUri={require('../assets/images/ngo5.jpeg')}
                     name="Humanity United Organization" />
                 </TouchableOpacity> */}
-              <Category />
+            {/* <Category /> */}
 
 
-              {/* </ScrollView> */}
-            </View>
+            {/* </ScrollView> */}
+            {/* </View> */}
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
               <View style={{ flex: 1, height: 3, backgroundColor: '#B4B4B8', width: '100%' }} />
             </View>
@@ -450,7 +453,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 3,
     borderColor: "#2A4D50",
-    marginStart: 25,
+    marginStart: 1,
     marginTop: 5
   },
   profileImg: {

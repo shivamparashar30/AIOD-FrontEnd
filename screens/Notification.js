@@ -1,16 +1,16 @@
-
-import { Alert, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { COLORS, SIZES } from '../../../constants'
+import { COLORS, SIZES } from '../constants'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
-import constant from '../../../constant'
+import constant from '../constant'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Entypo } from '@expo/vector-icons';
 
 
-const NgoPost = () => {
+
+
+const Notification = () => {
     const navigation = useNavigation();
 
     const [token, setToken] = useState("")
@@ -41,7 +41,7 @@ const NgoPost = () => {
         // setIsLoading(true)
         axios({
             method: 'get',
-            url: constant.BASE_URL + `/request/recipientRequests/${id}`,
+            url: constant.BASE_URL + `/request/requesterRequests/${id}`,
             headers: { 'Authorization': token }
         }).then((apiResponse) => {
             // const { name } = apiResponse.data.data
@@ -67,45 +67,6 @@ const NgoPost = () => {
         });
     }
 
-    function handleAcceptRequest(id) {
-        axios({
-            method: 'put',
-            url: constant.BASE_URL + `/request/${id}`,
-            headers: { 'Content-Type': 'application/json', 'charset': 'utf-8', 'Authorization': token },
-            data: {
-                status: 2
-            },
-        }).then((apiResponse) => {
-            console.log(apiResponse.data);
-            Alert.alert(apiResponse.data.message)
-        }).catch((err) => {
-            console.log(err)
-        })
-    }
-
-    // const handleAcceptRequest = (id) => {
-
-    // }
-
-    function handleRejectRequest(id) {
-        axios({
-            method: 'put',
-            url: constant.BASE_URL + `/request/${id}`,
-            headers: { 'Content-Type': 'application/json', 'charset': 'utf-8', 'Authorization': token },
-            data: {
-                status: 3
-            }
-        }).then((apiResponse) => {
-            console.log(apiResponse.data);
-            Alert.alert(apiResponse.data.message)
-        }).catch((err) => {
-            console.log(err)
-        })
-    }
-
-    // const handleRejectRequest = (id) => {
-
-    // }
     useEffect(() => {
         getToken()
         const fetchDataInterval = setInterval(() => {
@@ -117,17 +78,33 @@ const NgoPost = () => {
 
     function getPendingRequests(userList) {
         const filteredUser = userList.filter((user) => {
-            return user.status == 1;
+            return user.status == 2;
         });
         return filteredUser;
     }
-    return (
+    // function handleAcceptRequest(id) {
+    //     axios({
+    //         method: 'put',
+    //         url: constant.BASE_URL + `/request/${id}`,
+    //         headers: { 'Content-Type': 'application/json', 'charset': 'utf-8', 'Authorization': token },
+    //         data: {
+    //             status: 2
+    //         },
+    //     }).then((apiResponse) => {
+    //         console.log(apiResponse.data);
+    //         Alert.alert(apiResponse.data.message)
+    //     }).catch((err) => {
+    //         console.log(err)
+    //     })
+    // }
 
+
+    return (
         <SafeAreaView>
             <View style={styles.container}>
                 <View style={styles.topContainer}>
                     <View style={styles.backIcon}>
-                        <TouchableOpacity onPress={() => { navigation.navigate('NgoHomeScreen') }}>
+                        <TouchableOpacity onPress={() => { navigation.navigate('HomeScreen') }}>
                             <ArrowLeftIcon color={'#2A4D50'} />
                         </TouchableOpacity>
                     </View>
@@ -147,43 +124,23 @@ const NgoPost = () => {
                 data={paymentData}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) =>
-                    <View style={{ height: 180, margin: 5, marginTop: 10, backgroundColor: COLORS.primary, borderRadius: 10 }}>
-                        <Text style={{ marginTop: 10, fontWeight: 'bold', color: 'white', fontSize: 20, textAlign: 'center' }} >{item.userName} Donated {item.donationType} </Text>
+                    <View style={{ height: 150, margin: 5, marginTop: 10, backgroundColor: COLORS.primary, borderRadius: 10 }}>
+                        <Text style={{ marginTop: 10, fontWeight: 'bold', color: 'white', fontSize: 20, textAlign: 'center' }} >{item.userName} your Donation Request for {item.donationType} donation </Text>
                         <View style={{ height: 1, borderWidth: 1, borderColor: COLORS.secondary, marginTop: 5, width: '70%', marginHorizontal: 55 }}></View>
 
-                        <Text style={{ marginTop: 15, marginHorizontal: 10, fontWeight: 'bold', color: 'white', fontSize: 17, textAlign: 'center' }} >from- {item.address2}</Text>
-                        <Text style={{ marginTop: 5, fontWeight: 'bold', color: 'white', fontSize: 17, textAlign: 'center' }} >contact - {item.phoneno}</Text>
-                        <View style={{ height: 1, borderWidth: 1, borderColor: COLORS.secondary, marginTop: 15, width: '70%', marginHorizontal: 55 }}></View>
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <TouchableOpacity onPress={() => {
-                                console.log("FlatList", item._id);
-                                handleRejectRequest(item._id)
-                            }
-                            }>
+                        <Text style={{ marginTop: 15, marginHorizontal: 10, fontWeight: 'bold', color: 'white', fontSize: 17, textAlign: 'center' }} >is accepted and picked up shortly.</Text>
+                        <Text style={{ marginTop: 5, fontWeight: 'bold', color: 'white', fontSize: 17, textAlign: 'center' }} >Thankyou for donation</Text>
 
-                                {/* <TouchableOpacity onPress={() => {
-                                Alert.alert('Donation Rejected');
-                                handleDeleteItem(item.id); // Pass the item's id to delete it
-                            }}> */}
-                                <Entypo style={{
-                                    marginHorizontal: 100,
-                                }} name="cross" size={26} color="red" />
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => handleAcceptRequest(item._id)}>
-                                <Entypo name="check" size={26} color="green" />
-                            </TouchableOpacity>
 
-                        </View>
                     </View>
                 }
 
             />
         </SafeAreaView>
-
     )
 }
 
-export default NgoPost
+export default Notification
 
 const styles = StyleSheet.create({
     flatListContainer: {

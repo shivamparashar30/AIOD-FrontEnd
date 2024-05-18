@@ -22,6 +22,7 @@ import SelectLocMap from '../components/maps/SelectLocMap';
 import AddAddressDetails from '../components/maps/AddAddressDetails';
 import SelectNgo from '../components/maps/SelectNgo';
 import PaymentGateway from '../screens/DonationScreen/PaymentGateway';
+import Notification from '../screens/Notification';
 const Stack = createNativeStackNavigator();
 
 
@@ -51,6 +52,7 @@ export default function HomeNavigator() {
       {/* <Stack.Screen name="SelectNgoDropdown" options={{ headerShown: false }} component={SelectNgoDropdown} /> */}
       <Stack.Screen name="SelectNgo" options={{ headerShown: false }} component={SelectNgo} />
       <Stack.Screen name="PaymentGateway" options={{ headerShown: false }} component={PaymentGateway} />
+      <Stack.Screen name="Notification" options={{ headerShown: false }} component={Notification} />
 
     </Stack.Navigator>
   )
