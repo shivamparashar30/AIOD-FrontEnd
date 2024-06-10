@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
         borderRadius: SIZES.small
     },
     searchInput: {
-        fontFamily: "regular",
+        // fontFamily: "regular",
         width: "100%",
         height: "100%",
         paddingHorizontal: SIZES.small,

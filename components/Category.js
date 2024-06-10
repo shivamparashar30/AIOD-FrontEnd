@@ -31,7 +31,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, View, FlatList } from 'react-native';
+import { Image, StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import constant from '../constant';
 
 const Category = ({ data }) => {
@@ -82,13 +82,15 @@ const Category = ({ data }) => {
     }
 
     const ItemLayout = ({ item }) => (
-        <View style={styles.categoryContainer}>
-            <Image
-                style={styles.categoryImage}
-                source={{ uri: item.ImageUrl }}
-            />
-            <Text style={styles.categoryName}>{item.name}</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate('GlobalAidNgo', { data: item })}>
+            <View style={styles.categoryContainer}>
+                <Image
+                    style={styles.categoryImage}
+                    source={{ uri: item.ImageUrl }}
+                />
+                <Text style={styles.categoryName}>{item.name}</Text>
+            </View>
+        </TouchableOpacity>
     );
 
     return (
@@ -99,8 +101,10 @@ const Category = ({ data }) => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.flatListContainer}
             data={userList}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <ItemLayout item={item} />}
+            keyExtractor={(item) => item._id}
+            renderItem={({ item }) =>
+                <ItemLayout item={item} />
+            }
         />
     );
 };

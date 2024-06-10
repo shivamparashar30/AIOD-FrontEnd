@@ -101,7 +101,7 @@ const SelectNgoBooks = () => {
             },
         }).then((apiResponse) => {
             console.log(apiResponse.data.data);
-            Alert.alert("sucess")
+            Alert.alert("success")
             sendRequest(apiResponse.data.data._id)
         }).catch((err) => {
             console.log(err);
@@ -129,7 +129,7 @@ const SelectNgoBooks = () => {
             },
         }).then((apiResponse) => {
             console.log(apiResponse.data.data);
-            Alert.alert("Request Sended")
+            Alert.alert("Request Sent")
         }).catch((err) => {
             console.log(err);
             Alert.alert(err)

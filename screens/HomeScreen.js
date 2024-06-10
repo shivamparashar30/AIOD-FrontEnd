@@ -132,7 +132,8 @@ function HomeScreen() {
               autoplay={true}  // Change from "true" to true
               circleLoop
             />
-            <View>
+            {/* //choose donation */}
+            {/* <View>
               <Text style={styles.chooseDonation} >Choose Your donation</Text>
             </View>
             <View style={styles.donationContainer}>
@@ -182,7 +183,8 @@ function HomeScreen() {
 
                 </View>
               </TouchableOpacity>
-            </View>
+            </View> */}
+            {/* //choose donation */}
             {/* <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
               <View style={{ flex: 1, height: 3, backgroundColor: '#B4B4B8', width: '100%' }} />
             </View> */}

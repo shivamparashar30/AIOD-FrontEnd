@@ -7,8 +7,13 @@ import { COLORS, SIZES } from '../../constants'
 import { Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
-const GlobalAidNgo = () => {
+const GlobalAidNgo = ({ route }) => {
     const navigation = useNavigation();
+    const { data } = route.params;
+
+    console.log('====================================');
+    console.log(data);
+    console.log('====================================');
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -36,11 +41,11 @@ const GlobalAidNgo = () => {
                                 marginHorizontal: -6
                             }}
                             source={{
-                                uri: 'https://png.pngtree.com/png-clipart/20200709/original/pngtree-colorful-teamwork-logo-png-image_4127032.jpg'
+                                uri: data.ImageUrl
                             }} />
                     </View>
                     <View style={styles.titleTextContainer}>
-                        <Text style={styles.titleText(COLORS.primary, SIZES.xSmall - 5)}>Global Aid Network</Text>
+                        <Text style={styles.titleText(COLORS.primary, SIZES.xSmall - 5)}>{data.name}</Text>
                     </View>
                 </View>
             </View>
@@ -55,7 +60,9 @@ const GlobalAidNgo = () => {
 
                 <View style={styles.ngoImgContainer}>
                     <Image style={styles.ngoImg}
-                        source={require('../../assets/images/ngo1.jpeg')}
+                        source={{
+                            uri: data.ImageUrl
+                        }}
                     />
                 </View>
                 <View >
@@ -73,9 +80,9 @@ const GlobalAidNgo = () => {
                         textAlign: 'justify'
                         // letterSpacing: 0.6
                     }}>
-                        Goodwill Charity is a non-profit orphanage home that has been providing care for orphaned and vulnerable children since 1998. Our organization was founded with the belief that every child deserves a safe and loving home, and we have been committed to this mission for over two decades.
+                        {data.Description}
                     </Text>
-                    <Text style={{
+                    {/* <Text style={{
                         fontSize: 14,
                         fontWeight: '400',
                         marginTop: 14,
@@ -85,7 +92,7 @@ const GlobalAidNgo = () => {
                         // letterSpacing: 0.6
                     }}>
                         At Goodwill Charity, we provide food, shelter, education, and medical care to children who have been orphaned, abandoned, or abused.
-                    </Text>
+                    </Text> */}
                     {/* <Text style={{
                         fontSize: 14,
                         fontWeight: '400',
@@ -121,7 +128,7 @@ const GlobalAidNgo = () => {
                                 marginTop: 11,
                                 marginHorizontal: 0,
                                 textAlign: 'justify'
-                            }}> No. 258, Park St, Anna Sagar West Chennai</Text>
+                            }}> {data.Address}</Text>
                         </View>
                     </View>
 
@@ -138,7 +145,7 @@ const GlobalAidNgo = () => {
                                 marginTop: 11,
                                 marginHorizontal: 0,
                                 textAlign: 'justify'
-                            }}> +91 9413764323</Text>
+                            }}>{data.phoneno}</Text>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -155,12 +162,12 @@ const GlobalAidNgo = () => {
                                 marginTop: 11,
                                 marginHorizontal: 0,
                                 textAlign: 'justify'
-                            }}> help.goodwillcharity.com</Text>
+                            }}>{data.email}</Text>
                         </View>
                     </View>
 
                 </View>
-                <View style={{
+                {/* <View style={{
                     width: 200,
                     height: 200,
                     //  borderWidth: 1
@@ -185,7 +192,7 @@ const GlobalAidNgo = () => {
                             }}>Donate</Text>
                         </View>
                     </TouchableOpacity>
-                </View>
+                </View> */}
 
             </ScrollView>
         </SafeAreaView>

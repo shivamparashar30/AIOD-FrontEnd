@@ -81,6 +81,11 @@ function Profile() {
             navigation.navigate('EditProfile')
         }
     }
+    const YourDonation = (id) => {
+        if (id == 3) {
+            navigation.navigate('Notification')
+        }
+    }
     const About = (id) => {
         if (id == 5) {
             navigation.navigate('AboutUs')
@@ -104,7 +109,7 @@ function Profile() {
 
     const ListItem = ({ id, title, icon, fullWidth }) => {
         return (
-            <TouchableWithoutFeedback onPress={() => { logout(id), YourProfile(id), About(id), Update(id) }}>
+            <TouchableWithoutFeedback onPress={() => { logout(id), YourProfile(id), About(id), YourDonation(id), Update(id) }}>
                 <View style={[styles.itemCard, fullWidth ? styles.fullWidthCard : null]}>
                     <Ionicons name={icon} size={30} color="black" />
                     <Text style={styles.itemTitle}>{title}</Text>

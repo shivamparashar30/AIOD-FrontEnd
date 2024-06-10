@@ -112,6 +112,33 @@ const SelectNgo = () => {
         });
     }
 
+    // const sendRequest = (donationId) => {
+    //     axios({
+    //         method: 'post',
+    //         url: constant.BASE_URL + '/request/sendrequest',
+    //         headers: { 'Content-Type': 'application/json', 'charset': 'utf-8', 'Authorization': token },
+    //         data: {
+    //             recipient: ngoData._id,
+    //             donationid: donationId,
+    //             donationType: "Food",
+    //             userName: userData.name,
+    //             address2: type.address2,
+    //             phoneno: type.phoneno,
+    //             count: type.type.count,
+    //             source: type.type.selectedType,
+    //             vehicle: type.type.selectedIcon,
+    //             Item: type.type.foodItems,
+    //             status: 1
+    //         },
+    //     }).then((apiResponse) => {
+    //         console.log(apiResponse.data.data);
+    //         Alert.alert("Request Sent!")
+    //     }).catch((err) => {
+    //         console.log(err);
+    //         Alert.alert(err)
+    //         // setIsLoading(true);
+    //     });
+    // }
     const sendRequest = (donationId) => {
         axios({
             method: 'post',
@@ -132,13 +159,19 @@ const SelectNgo = () => {
             },
         }).then((apiResponse) => {
             console.log(apiResponse.data.data);
-            Alert.alert("Request Sended")
+            Alert.alert(
+                "Request Sent!",
+                "",
+                [
+                    { text: "OK", onPress: () => navigation.navigate('HomeScreen') }
+                ]
+            );
         }).catch((err) => {
             console.log(err);
-            Alert.alert(err)
-            // setIsLoading(true);
+            Alert.alert(err.message);
         });
     }
+
 
     function getNgos(data) {
         const filteredUser = data.filter((user) => {

@@ -166,9 +166,10 @@ export default function Donate() {
                         <Category imgUri={require('../assets/images/ngo1.jpeg')}
                             name="Global Aid Network" />
                     </TouchableOpacity> */}
-                    <TouchableOpacity onPress={() => { navigation.navigate("GlobalAidNgo") }}>
-                        <Category />
-                    </TouchableOpacity>
+                    <Category />
+                    {/* <TouchableOpacity onPress={() => { navigation.navigate("GlobalAidNgo") }}>
+                        
+                    </TouchableOpacity> */}
 
                     {/* <TouchableOpacity onPress={() => { navigation.navigate("HopeForNgo") }}>
                             <Category imgUri={require('../assets/images/ngo2.jpg')}

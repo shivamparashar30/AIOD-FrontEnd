@@ -11,6 +11,7 @@ const Food = () => {
 
     const [selectedSource, setSelectedSource] = useState('home');
     const [selectedType, setSelectedType] = useState('');
+    const [foodItems, setFoodItems] = useState("");
 
     const handleSourcePress = (source) => {
         setSelectedSource(source);
@@ -55,7 +56,7 @@ const Food = () => {
     };
     //text input
 
-    const [foodItems, setFoodItems] = useState("");
+
 
     return (
         <SafeAreaView>
@@ -130,17 +131,17 @@ const Food = () => {
                     Food Items
                 </Text>
             </View>
-            <View style={styles.containerThree}>
-                <TextInput
-                    style={styles.textInput}
-                    multiline={true}
-                    placeholder="1. Chapati - 12 ..."
-                    textAlignVertical="top"
-                    value={foodItems}
-                    onChangeText={setFoodItems}
-                    editable={true} // Ensure the TextInput is editable
-                />
-            </View>
+            {/* <View style={styles.containerThree}> */}
+            <TextInput
+                style={styles.textInput}
+                multiline={true}
+                placeholder="1. Chapati - 12 ..."
+                // textAlignVertical="top"
+                value={foodItems}
+                onChangeText={setFoodItems}
+            // editable={true} // Ensure the TextInput is editable
+            />
+            {/* </View> */}
             <View>
                 <Text style={{ fontSize: 18, fontWeight: '600', marginTop: 91, marginLeft: 19 }}>
                     Food Quantity
@@ -305,11 +306,18 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     textInput: {
-        height: 70, // Set the height to 300
+        // flex: 1,
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        height: 70,
+        width: '90%',
+        marginHorizontal: 20,
+        marginTop: 10,
+        // Set the height to 300
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 10,
-        padding: 10,
+        // padding: 10,
         fontSize: 18,
         textAlignVertical: 'top', // Aligns text at the top vertically
     },

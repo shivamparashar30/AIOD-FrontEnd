@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid';
 import { COLORS, SIZES } from '../constants';
 import { Ionicons, Entypo } from '@expo/vector-icons';
+// import Entypo from '@expo/vector-icons/Entypo';
 
 const SelectAddress = () => {
     const navigation = useNavigation();
@@ -231,10 +232,9 @@ const styles = StyleSheet.create({
         borderRadius: SIZES.small
     },
     searchInput: {
-        fontFamily: "regular",
         width: "100%",
         height: "100%",
         paddingHorizontal: SIZES.small,
-        color: "white", // Corrected color format
+        color: "white",
     },
 })

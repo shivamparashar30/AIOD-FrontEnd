@@ -25,6 +25,11 @@ const Money = () => {
     const [ngoData, setNgoData] = useState({})
     const [userData, setUserData] = useState({})
 
+    const [selectedSource, setSelectedSource] = useState('');
+    const [amountInput, setAmountInput] = useState('');
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
 
     const getToken = async () => {
         try {
@@ -68,7 +73,12 @@ const Money = () => {
             url: constant.BASE_URL + '/auth/me',
             headers: { 'Authorization': token }
         }).then((apiResponse) => {
+            const { username, name, email, phoneno } = apiResponse.data.data;
+
             setUserData(apiResponse.data.data)
+            setFullName(name)
+            setEmail(email)
+            setPhone(phoneno)
         }).catch((err) => {
             console.log("Profile" + err);
         });
@@ -117,11 +127,7 @@ const Money = () => {
     }
 
 
-    const [selectedSource, setSelectedSource] = useState('');
-    const [amountInput, setAmountInput] = useState('');
-    const [fullName, setFullName] = useState('shivam');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+
 
     const handleSourcePress = (source) => {
         setSelectedSource(source);
