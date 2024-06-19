@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Icon } from 'react-native-elements';
 import constant from '../../constant';
+import { AntDesign } from '@expo/vector-icons';
 
 
 const SelectNgo = () => {
@@ -214,12 +215,13 @@ const SelectNgo = () => {
                     return (
                         <View style={styles.dropdownButtonStyle}>
                             {selectedItem && (
-                                <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+                                // <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+                                <AntDesign name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
                             )}
                             <Text style={styles.dropdownButtonTxtStyle}>
                                 {selectedItem || 'Select NGO'}
                             </Text>
-                            <Icon name={isOpened ? 'chevron-up' : 'chevron-down'} style={styles.dropdownButtonArrowStyle} />
+                            <AntDesign name={isOpened ? 'up' : 'down'} style={styles.dropdownButtonArrowStyle} />
                         </View>
                     );
                 }}

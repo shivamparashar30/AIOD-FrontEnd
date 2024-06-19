@@ -176,7 +176,7 @@ const EmpowermentNgo = () => {
                             backgroundColor: COLORS.primary,
                             borderRadius: 14,
                             alignItems: 'center',
-                            justifyContent: 'center'
+                            // justifyContent: 'center'
                         }}>
                             <Text style={{
                                 fontSize: 20,
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     },
     ngoImgContainer: {
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         marginTop: 30,
         marginHorizontal: 22,
         height: 160,

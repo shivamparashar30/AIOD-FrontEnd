@@ -219,7 +219,7 @@ const Money = () => {
                     <Text style={[styles.tabText, selectedSource === '5000' ? styles.selectedTabText : null]}>₹5000</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 10, marginHorizontal: 18, width: '90%', justifyContent: 'center' }}>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 10, marginHorizontal: 18, width: '90%' }}>
                 <View style={{ flex: 1, height: 1, backgroundColor: '#B4B4B8', width: '100%' }} />
             </View>
             <View >
@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E9ECEF',
         borderRadius: 12,
         flexDirection: 'row',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 12,
     },
@@ -475,7 +475,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         paddingHorizontal: 12,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 8,
     },

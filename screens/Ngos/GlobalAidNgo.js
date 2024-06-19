@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     },
     ngoImgContainer: {
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         marginTop: 30,
         marginHorizontal: 22,
         height: 160,

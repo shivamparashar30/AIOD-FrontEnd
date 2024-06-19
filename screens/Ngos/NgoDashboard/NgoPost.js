@@ -537,7 +537,7 @@ const NgoPost = () => {
 
                         <Text style={{ marginTop: 15, marginHorizontal: 10, fontWeight: 'bold', color: 'white', fontSize: 17, textAlign: 'center' }} >from- {item.address2}</Text>
                         <Text style={{ marginTop: 5, fontWeight: 'bold', color: 'white', fontSize: 17, textAlign: 'center' }} >contact - {item.phoneno}</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                        <View style={{ flexDirection: 'row' }}>
                             <Text style={{ marginTop: 5, fontWeight: 'bold', color: 'white', fontSize: 17, textAlign: 'center' }} >Time - {formatDateTime(item.createdAt.toString())} </Text>
                             <TouchableOpacity onPress={() => handleMoreInfo(item)}>
                                 <Text style={{ marginTop: 10, fontWeight: 'bold', color: 'red', fontSize: 12, textAlign: 'center' }}> more info</Text>
@@ -607,7 +607,7 @@ export default NgoPost;
 const styles = StyleSheet.create({
     modalContainer: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },

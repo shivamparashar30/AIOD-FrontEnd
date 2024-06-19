@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     button: {
         width: 150,
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         backgroundColor: 'rgba(255,235,255,0.7)',
         paddingHorizontal: 18,
         paddingVertical: 12,
