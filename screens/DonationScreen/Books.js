@@ -51,16 +51,16 @@ const Books = () => {
                 </Text>
 
             </View>
-            <View style={styles.containerThree}>
-                <TextInput
-                    style={styles.textInput}
-                    multiline={true}
-                    placeholder="More Puzzle by Shakuntala Devi ...... Hindi Grammer Class-8th .."
-                    textAlignVertical="top"
-                    value={bookDetail} // Ensure `bookDetail` is properly initialized and updated
-                    onChangeText={setBookDetail} // Use a function to update `bookDetail`
-                />
-            </View>
+            {/* <View style={styles.containerThree}> */}
+            <TextInput
+                style={styles.textInput}
+                multiline={true}
+                placeholder="More Puzzle by Shakuntala Devi ...... Hindi Grammer Class-8th .."
+                textAlignVertical="top"
+                value={bookDetail} // Ensure `bookDetail` is properly initialized and updated
+                onChangeText={setBookDetail} // Use a function to update `bookDetail`
+            />
+            {/* </View> */}
             <View>
                 <Text style={{ fontSize: 18, fontWeight: '600', marginTop: 91, marginLeft: 19 }}>
                     Books Quantity
@@ -229,11 +229,18 @@ const styles = StyleSheet.create({
         paddingTop: 17,
     },
     textInput: {
-        height: 70, // Set the height to 300
+        // flex: 1,
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        height: 70,
+        width: '90%',
+        marginHorizontal: 20,
+        marginTop: 10,
+        // Set the height to 300
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 10,
-        padding: 10,
+        // padding: 10,
         fontSize: 18,
         textAlignVertical: 'top', // Aligns text at the top vertically
     },

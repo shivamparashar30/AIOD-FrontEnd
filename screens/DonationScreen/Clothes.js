@@ -128,18 +128,18 @@ const Clothes = () => {
                 </Text>
                 <Text style={{ color: 'gray', marginTop: 15, marginHorizontal: 7 }}>(Optional)</Text>
             </View>
-            <View style={styles.containerThree}>
-                <TextInput
-                    style={styles.textInput}
-                    multiline={true}
-                    placeholder=" 4 - Tshirts (Size-XL) ..."
-                    textAlignVertical="top"
-                    value={item}
-                    onChangeText={setItem}
-                />
-            </View>
+            {/* <View style={styles.containerThree}> */}
+            <TextInput
+                style={styles.textInput}
+                multiline={true}
+                placeholder=" 4 - Tshirts (Size-XL) ..."
+                textAlignVertical="top"
+                value={item}
+                onChangeText={setItem}
+            />
+            {/* </View> */}
             <View>
-                <Text style={{ fontSize: 18, fontWeight: '600', marginTop: 83, marginLeft: 19 }}>
+                <Text style={{ fontSize: 18, fontWeight: '600', marginTop: 13, marginLeft: 19 }}>
                     Upload Images
                 </Text>
                 <Text style={{ fontSize: 14, color: 'grey', marginTop: 13, marginLeft: 19 }}>
@@ -244,11 +244,18 @@ const styles = StyleSheet.create({
         paddingTop: 17,
     },
     textInput: {
-        height: 70, // Set the height to 300
+        // flex: 1,
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        height: 70,
+        width: '90%',
+        marginHorizontal: 20,
+        marginTop: 10,
+        // Set the height to 300
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 10,
-        padding: 10,
+        // padding: 10,
         fontSize: 18,
         textAlignVertical: 'top', // Aligns text at the top vertically
     },

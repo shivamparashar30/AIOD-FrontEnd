@@ -100,7 +100,7 @@ const NgoOtherNotification = () => {
     const renderItem = ({ item }) => {
         if (item.status === 4) {
             return (
-                <View style={{ height: 150, margin: 5, marginTop: 10, backgroundColor: COLORS.primary, borderRadius: 10 }}>
+                <View style={{ height: 80, margin: 5, marginTop: 10, backgroundColor: COLORS.primary, borderRadius: 10 }}>
                     <View style={{ flexDirection: 'row' }}>
                         <Entypo name="dot-single" size={54} color="#A1DD70" />
                         <Text style={{
@@ -108,29 +108,21 @@ const NgoOtherNotification = () => {
                             fontSize: 16,
                             fontWeight: 'bold',
                             textAlign: 'auto',
-                            marginTop: 10
+                            marginTop: 18
                         }}>
-                            {`Your Donation for ${item.donationType} has been completed.`}
+                            {`You Recieved Donation for ${item.donationType}.`}
                         </Text>
                     </View>
-                    <Text style={{
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        color: '#A1DD70',
-                        textAlign: 'center',
-                        marginTop: 10
-                    }}>
-                        Thank you for your donation.
-                    </Text>
+
                     <TouchableOpacity onPress={() => handleAssign(item.recipient)}>
                         <Text style={{
                             textAlign: 'right',
                             marginHorizontal: 10,
-                            marginTop: 10,
+                            marginTop: -5,
                             color: 'pink'
                         }}>More info</Text>
                     </TouchableOpacity>
-                    <View style={{ height: 1, borderWidth: 1, borderColor: COLORS.secondary, marginTop: 5, width: '70%', marginHorizontal: 55 }}></View>
+                    {/* <View style={{ height: 1, borderWidth: 1, borderColor: COLORS.secondary, marginTop: 5, width: '70%', marginHorizontal: 55 }}></View> */}
                 </View>
             );
         }

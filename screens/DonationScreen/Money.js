@@ -360,6 +360,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 19
 
     },
+
     inputTwo: {
         height: 40,
         width: 350,

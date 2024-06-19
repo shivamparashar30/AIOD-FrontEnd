@@ -249,7 +249,7 @@ function HomeScreen() {
                 many lives. </Text>
 
             </View>
-            <View style={{ width: '100', height: 270, marginTop: 10 }}>
+            <View style={{ width: '100%', height: 270, marginTop: 10 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{
                   height: 120,

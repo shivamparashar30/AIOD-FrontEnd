@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     donationTextContainer: {
         marginTop: 6,
         marginHorizontal: 10,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center ',
         width: 150
     },
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
         width: 75,
         marginTop: 6,
         marginHorizontal: 12,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center ',
         backgroundColor: COLORS.primary,
         borderRadius: 50,
